@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-
-		F4FF95D7245B92E800C19C63 /*  StandaloneVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  StandaloneVideoPlayer.swift */; };
-
-		5E555C0D2413F4C50049A1A2 /* StandaloneVideoPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* StandaloneVideoPlayer.mm */; };
+		85C11DA62548570D0083D0C8 /* PlayerVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C11DA52548570D0083D0C8 /* PlayerVideo.swift */; };
+		85C11DD1254859090083D0C8 /* PlayerVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C11DD0254859090083D0C8 /* PlayerVideoView.swift */; };
+		85C11F3C254875B30083D0C8 /* RNTPlayerVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C11F3B254875B30083D0C8 /* RNTPlayerVideoViewManager.m */; };
+		85C120A9254884300083D0C8 /* RNTPlayerVideoViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C120A8254884300083D0C8 /* RNTPlayerVideoViewManager.swift */; };
+		F4FF95D7245B92E800C19C63 /* StandaloneVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* StandaloneVideoPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +28,13 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libStandaloneVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStandaloneVideoPlayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
-
+		85C11DA52548570D0083D0C8 /* PlayerVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVideo.swift; sourceTree = "<group>"; };
+		85C11DD0254859090083D0C8 /* PlayerVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVideoView.swift; sourceTree = "<group>"; };
+		85C11F3B254875B30083D0C8 /* RNTPlayerVideoViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTPlayerVideoViewManager.m; sourceTree = "<group>"; };
+		85C120A8254884300083D0C8 /* RNTPlayerVideoViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNTPlayerVideoViewManager.swift; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* StandaloneVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandaloneVideoPlayer.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* StandaloneVideoPlayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StandaloneVideoPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* StandaloneVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandaloneVideoPlayer.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +59,13 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
-
+				85C120A8254884300083D0C8 /* RNTPlayerVideoViewManager.swift */,
+				85C11DD0254859090083D0C8 /* PlayerVideoView.swift */,
+				85C11DA52548570D0083D0C8 /* PlayerVideo.swift */,
+				85C11F3B254875B30083D0C8 /* RNTPlayerVideoViewManager.m */,
 				F4FF95D6245B92E800C19C63 /* StandaloneVideoPlayer.swift */,
 				B3E7B5891CC2AC0600A0062D /* StandaloneVideoPlayer.m */,
 				F4FF95D5245B92E700C19C63 /* StandaloneVideoPlayer-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,11 +127,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-
+				85C120A9254884300083D0C8 /* RNTPlayerVideoViewManager.swift in Sources */,
+				85C11F3C254875B30083D0C8 /* RNTPlayerVideoViewManager.m in Sources */,
+				85C11DD1254859090083D0C8 /* PlayerVideoView.swift in Sources */,
+				85C11DA62548570D0083D0C8 /* PlayerVideo.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* StandaloneVideoPlayer.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* StandaloneVideoPlayer.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,11 +244,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = StandaloneVideoPlayer;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "StandaloneVideoPlayer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
@@ -263,10 +263,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = StandaloneVideoPlayer;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "StandaloneVideoPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};

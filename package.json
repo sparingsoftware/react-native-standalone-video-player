@@ -1,7 +1,7 @@
 {
   "name": "react-native-standalone-video-player",
   "version": "0.1.0",
-  "description": "React Native video player which can be re-used across views ",
+  "description": "React Native video player which can be re-used across views.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
