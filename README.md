@@ -9,7 +9,7 @@ In 95% of cases https://github.com/react-native-video/react-native-video will be
 ## Installation
 
 ```sh
-npm install react-native-standalone-video-player
+npm install https://github.com/SparingSoftware/react-native-standalone-video-player
 ```
 
 ## Usage
