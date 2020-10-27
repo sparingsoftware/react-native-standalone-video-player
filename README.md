@@ -2,6 +2,10 @@
 
 React Native video player which can be re-used across views 
 
+In 95% of cases https://github.com/react-native-video/react-native-video will be enough but if you need player which is separated from view - use this one.
+
+
+
 ## Installation
 
 ```sh
@@ -11,12 +15,36 @@ npm install react-native-standalone-video-player
 ## Usage
 
 ```js
-import StandaloneVideoPlayer from "react-native-standalone-video-player";
-
+import {
+  useVideoPlayer,
+  PlayerVideoView,
+} from 'react-native-standalone-video-player';
 // ...
 
-const result = await StandaloneVideoPlayer.multiply(3, 7);
+const { load, play, pause } = useVideoPlayer(0);
+
+useEffect(() => {
+  load('VIDEO_URL');
+}, []);
+
+//...
+<PlayerVideoView
+  style={styles.player}
+  isBoundToPlayer={true}
+  playerInstance={0}
+/>
+//...
+
+
 ```
+
+## TODO
+1) Docs
+2) Example (2 views) with giff
+3) Example (FlatList) with giff
+4) Android multiviews (SurfaceView?)
+5) isBoundToPlayer vs rerender
+
 
 ## Contributing
 
