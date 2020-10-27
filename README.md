@@ -44,6 +44,7 @@ useEffect(() => {
 3) Example (FlatList) with giff
 4) Android multiviews (SurfaceView?)
 5) isBoundToPlayer vs rerender
+6) tag version
 
 
 ## Contributing
