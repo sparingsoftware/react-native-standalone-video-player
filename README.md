@@ -8,7 +8,7 @@ In 95% of cases https://github.com/react-native-video/react-native-video will be
 ![video](https://github.com/SparingSoftware/react-native-standalone-video-player/blob/main/assets/android_2views.gif)
 
 
-> On iOS it is possible to streatm at multiple views simultaneusly.
+> On iOS it is possible to stream at multiple views simultaneusly.
 > On Android it is not supported yet. (TODO: check SurfaceTexture)
 
 
@@ -33,7 +33,7 @@ useEffect(() => {
   load('VIDEO_URL');
 }, []);
 
-//...
+// First player ...
 <PlayerVideoView
   style={styles.player}
   isBoundToPlayer={true}
@@ -41,6 +41,12 @@ useEffect(() => {
 />
 //...
 
+// Second player ...
+<PlayerVideoView
+  style={styles.player}
+  isBoundToPlayer={false}
+  playerInstance={0}
+/>
 
 ```
 
