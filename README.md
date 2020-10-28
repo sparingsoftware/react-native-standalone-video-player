@@ -24,6 +24,7 @@ In 90% of cases [react-native-video](https://github.com/react-native-video/react
 
 ```sh
 npm install https://github.com/SparingSoftware/react-native-standalone-video-player
+cd ios && pod install
 ```
 
 ## Usage
