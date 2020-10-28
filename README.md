@@ -27,7 +27,7 @@ import {
 } from 'react-native-standalone-video-player';
 // ...
 
-const { load, play, pause } = useVideoPlayer(0);
+const { load, play, pause } = useVideoPlayer();
 
 useEffect(() => {
   load('VIDEO_URL');
@@ -36,26 +36,20 @@ useEffect(() => {
 // First player ...
 <PlayerVideoView
   style={styles.player}
-  isBoundToPlayer={true}
-  playerInstance={0}
 />
 //...
 
 // Second player ...
 <PlayerVideoView
   style={styles.player}
-  isBoundToPlayer={false}
-  playerInstance={0}
 />
 
 ```
 
 ## TODO
 1) Docs
-2) Example (FlatList) with giff
-3) Android multiviews (SurfaceView?)
-4) isBoundToPlayer vs rerender
-5) tag version
+2) isBoundToPlayer vs rerender
+3) tag version
 
 
 ## Contributing
