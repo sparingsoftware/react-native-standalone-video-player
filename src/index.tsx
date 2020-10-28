@@ -87,14 +87,10 @@ function getVideoDuration(playerInstance = 0): Promise<number> {
 function useVideoPlayer(playerInstance = 0) {
   function play() {
     PlayerVideoManager.play(playerInstance);
-
-    console.log(`PlayerVideo [${playerInstance}] play`);
   }
 
   function pause() {
     PlayerVideoManager.pause(playerInstance);
-
-    console.log(`PlayerVideo [${playerInstance}] pause`);
   }
 
   function stop() {
@@ -107,8 +103,6 @@ function useVideoPlayer(playerInstance = 0) {
     CurrentVideoId[playerInstance] = null;
 
     PlayerVideoManager.stop(playerInstance);
-
-    console.log(`PlayerVideo [${playerInstance}] stop`);
   }
 
   function load(
@@ -134,26 +128,18 @@ function useVideoPlayer(playerInstance = 0) {
     }
 
     PlayerVideoManager.load(playerInstance, url, isHls);
-
-    console.log(`PlayerVideo [${playerInstance}] load: ${id}`);
   }
 
   function seek(pos: number) {
     PlayerVideoManager.seek(playerInstance, pos);
-
-    console.log(`PlayerVideo [${playerInstance}] seek: ${pos}`);
   }
 
   function seekForward(time: number) {
     PlayerVideoManager.seekForward(playerInstance, time);
-
-    console.log(`PlayerVideo [${playerInstance}] seekForward by: ${time}`);
   }
 
   function seekRewind(time: number) {
     PlayerVideoManager.seekRewind(playerInstance, time);
-
-    console.log(`PlayerVideo [${playerInstance}] seekRewind by: ${time}`);
   }
 
   return {
@@ -186,8 +172,6 @@ function usePlayerVideoStatus(playerInstance = 0) {
     const subscription = eventEmitter.addListener(
       'PlayerStatusChanged',
       (data) => {
-        console.log('PlayerStatusChanged: ', data);
-
         if (data.instance === playerInstance) {
           PlayerInfo.lastStatus = createStatus(data.status);
 
@@ -207,7 +191,10 @@ function usePlayerVideoStatus(playerInstance = 0) {
 //
 
 // it updates only for current recording
-function useRecordingPlayerVideoStatus(recordingId: string) {
+function useRecordingPlayerVideoStatus(
+  recordingId: string,
+  playerInstance: number = 0
+) {
   // get current status
   const [status, setStatus] = useState(PlayerInfo.lastStatus);
 
@@ -215,12 +202,10 @@ function useRecordingPlayerVideoStatus(recordingId: string) {
     const subscription = eventEmitter.addListener(
       'PlayerStatusChanged',
       (data) => {
-        console.log('PlayerStatusChanged: ', data);
-        console.log(
-          `useRecordingPlayerVideoStatus: recordingId: ${recordingId}, CurrentVideoId[0]: ${CurrentVideoId[0]}`
-        );
-
-        if (data.instance === 0 && recordingId === CurrentVideoId[0]) {
+        if (
+          data.instance === playerInstance &&
+          recordingId === CurrentVideoId[playerInstance]
+        ) {
           PlayerInfo.lastStatus = createStatus(data.status);
 
           setStatus(createStatus(data.status));
