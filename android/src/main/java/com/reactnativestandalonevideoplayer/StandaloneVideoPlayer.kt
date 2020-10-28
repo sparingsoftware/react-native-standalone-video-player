@@ -63,6 +63,9 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun load(instance: Int, url: String, isHls: Boolean) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
 
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "Load = ${url}")
@@ -101,6 +104,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun stop(instance: Int) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "STOOOOP!!")
 
@@ -112,6 +119,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun play(instance: Int) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "PLAY")
 
@@ -121,6 +132,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun pause(instance: Int) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "PAUSE")
 
@@ -130,6 +145,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun seek(instance: Int, position: Double) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "SEEK TO = ${position}")
 
@@ -139,6 +158,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun seekForward(instance: Int, time: Double) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "SEEK FORWARD by = ${time}")
 
@@ -148,6 +171,10 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun seekRewind(instance: Int, time: Double) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      return
+    }
+
     Handler(context.mainLooper).post {
       Log.d("PlayerVideo", "SEEK FORWARD by = ${time}")
 
@@ -157,6 +184,11 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   @ReactMethod
   fun getDuration(instance: Int, promise: Promise) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      promise.resolve(0)
+      return
+    }
+
     Handler(context.mainLooper).post {
       val duration = PlayerVideo.instances[instance].duration / 1000
       promise.resolve(duration)

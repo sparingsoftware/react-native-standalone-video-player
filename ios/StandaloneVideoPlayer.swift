@@ -99,7 +99,10 @@ class StandaloneVideoPlayer: RCTEventEmitter {
     
     @objc(getDuration:resolve:reject:)
     func getDuration(instance: Int, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) {
-        guard instance >= 0 && instance < PlayerVideo.instances.count else { return }
+        guard instance >= 0 && instance < PlayerVideo.instances.count else {
+          resolve(0)
+          return
+        }
         
         let duration = PlayerVideo.instances[instance].duration
         resolve(duration)
