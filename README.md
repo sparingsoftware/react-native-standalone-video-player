@@ -1,11 +1,16 @@
 # react-native-standalone-video-player
 
 React Native video player which can be re-used across views 
+> ⚠️  🚧  - **Still under development** (no official release yet).
+
+---
 
 In 90% of cases [react-native-video](https://github.com/react-native-video/react-native-video) will be enough. However there may be some cases when you need the Player to be separated from the View:
   - Loading video before presenting it
   - Showing the same video in different parts of the app (like preview and then fullview)
   - As list element
+
+---
 
 ![video](https://github.com/SparingSoftware/react-native-standalone-video-player/blob/main/assets/ios_2views.gif)
 ![video](https://github.com/SparingSoftware/react-native-standalone-video-player/blob/main/assets/android_2views.gif)
@@ -19,6 +24,7 @@ In 90% of cases [react-native-video](https://github.com/react-native-video/react
 
 ```sh
 npm install https://github.com/SparingSoftware/react-native-standalone-video-player
+cd ios && pod install
 ```
 
 ## Usage
@@ -129,6 +135,11 @@ You can use `isBoundToPlayer` as option to enable/disable streaming to this view
 ```
 Using `isBoundToPlayer` is better because it does not require rerenders however it may lead to strange behaviour especially on Android. I am still not sure which option to use...
 
+---
+
+Template Generated with https://github.com/callstack/react-native-builder-bob
+
+---
 
 ## Contributing
 
