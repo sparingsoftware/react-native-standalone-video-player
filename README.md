@@ -45,10 +45,62 @@ useEffect(() => {
 
 ```
 
-## TODO
-1) Docs
-2) isBoundToPlayer vs rerender
-3) tag version
+## Docs
+
+Hooks
+* [useVideoPlayer](#useVideoPlayer)
+* usePlayerVideoStatus
+* usePlayerVideoProgress
+
+Imperative
+* PlayerVideoManager
+* getVideoDuration
+* clearPlayerVideo
+
+View
+* PlayerVideoView
+
+### useVideoPlayer
+| returns | params |
+| ------ | ------ |
+| play | |
+| pause |  |
+| stop |  |
+| load | `url: string, autoplay: boolean = true, isHls = true` |
+| seek | `time: number` |
+| seekForward | `time: number` |
+| seekRewind | `time: number` |
+
+### usePlayerVideoStatus => PlayerStatus
+PlayerStatus
+| status |
+| ------ |
+| new |
+| loading |
+| playing | 
+| paused |
+| error  |
+| stopped |
+| none  |
+
+### usePlayerVideoProgress
+| returns | params |
+| ------ | ------ |
+| progress | number 0...1|
+| duration | number |
+
+### <PlayerVideoView />
+| prop |  |
+| ------ | ------ |
+| isBoundToPlayer | `boolean` - if `true` player will stream into this view |
+| playerInstance | `number` |
+
+
+## Other
+
+### ExoPlayer / AVPlayer
+
+### isBoundToPlayer vs optional rendering
 
 
 ## Contributing
