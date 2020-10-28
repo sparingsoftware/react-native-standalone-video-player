@@ -135,6 +135,9 @@ You can use `isBoundToPlayer` as option to enable/disable streaming to this view
 Using `isBoundToPlayer` is better because it does not require rerenders however it may lead to strange behaviour especially on Android. I am still not sure which option to use...
 
 
+### Generated with https://github.com/callstack/react-native-builder-bob
+
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
