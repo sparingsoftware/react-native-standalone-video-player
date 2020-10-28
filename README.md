@@ -47,18 +47,20 @@ useEffect(() => {
 
 ## Docs
 
+View
+* [PlayerVideoView](#<PlayerVideoView/>)
+
 Hooks
 * [useVideoPlayer](#useVideoPlayer)
-* usePlayerVideoStatus
-* usePlayerVideoProgress
+* [usePlayerVideoStatus](#usePlayerVideoStatus)
+* [usePlayerVideoProgress](#usePlayerVideoProgress)
 
 Imperative
 * PlayerVideoManager
 * getVideoDuration
 * clearPlayerVideo
 
-View
-* PlayerVideoView
+
 
 ### useVideoPlayer
 | returns | params |
@@ -71,7 +73,7 @@ View
 | seekForward | `time: number` |
 | seekRewind | `time: number` |
 
-### usePlayerVideoStatus => PlayerStatus
+### usePlayerVideoStatus
 PlayerStatus
 | status |
 | ------ |
