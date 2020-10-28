@@ -16,9 +16,6 @@ import {
   PlayerStatus,
 } from 'react-native-standalone-video-player';
 
-// create instance
-createStandalonePlayerVideoInstance();
-
 console.disableYellowBox = true;
 
 //

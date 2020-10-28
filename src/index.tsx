@@ -117,6 +117,10 @@ function useVideoPlayer(playerInstance = 0) {
     id: string | null = null,
     isHls = true
   ) {
+    if (playerInstance >= PlayerInstances) {
+      createStandalonePlayerVideoInstance();
+    }
+
     CurrentVideoId[playerInstance] = id;
 
     // emit here for faster loop (dont wait from native)
@@ -193,6 +197,40 @@ function usePlayerVideoStatus(playerInstance = 0) {
 
   return {
     status,
+  };
+}
+
+//
+
+// it updates only for current recording
+function useRecordingPlayerVideoStatus(recordingId: string) {
+  // get current status
+  const [status, setStatus] = useState(PlayerInfo.lastStatus);
+
+  useEffect(() => {
+    const subscription = eventEmitter.addListener(
+      'PlayerStatusChanged',
+      (data) => {
+        if (data.instance === 0 && recordingId === CurrentVideoId[0]) {
+          PlayerInfo.lastStatus = createStatus(data.status);
+
+          setStatus(createStatus(data.status));
+        }
+      }
+    );
+
+    return () => subscription.remove();
+  }, [recordingId]);
+
+  //
+
+  const forceLoadingStatus = () => {
+    setStatus(PlayerStatus.loading);
+  };
+
+  return {
+    status,
+    forceLoadingStatus,
   };
 }
 
@@ -293,10 +331,10 @@ export {
   PlayerVideoView,
   PlayerStatus,
   PlayerVideoManager,
-  createStandalonePlayerVideoInstance,
   clearPlayerVideo,
   getVideoDuration,
   useVideoPlayer,
   usePlayerVideoStatus,
+  useRecordingPlayerVideoStatus,
   usePlayerVideoProgress,
 };
