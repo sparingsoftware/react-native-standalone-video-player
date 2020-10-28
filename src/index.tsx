@@ -215,6 +215,11 @@ function useRecordingPlayerVideoStatus(recordingId: string) {
     const subscription = eventEmitter.addListener(
       'PlayerStatusChanged',
       (data) => {
+        console.log('PlayerStatusChanged: ', data);
+        console.log(
+          `useRecordingPlayerVideoStatus: recordingId: ${recordingId}, CurrentVideoId[0]: ${CurrentVideoId[0]}`
+        );
+
         if (data.instance === 0 && recordingId === CurrentVideoId[0]) {
           PlayerInfo.lastStatus = createStatus(data.status);
 
