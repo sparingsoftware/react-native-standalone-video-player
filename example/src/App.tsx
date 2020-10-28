@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   FlatList,
   TouchableOpacity,
   Image,
@@ -10,10 +9,7 @@ import {
 } from 'react-native';
 import {
   useVideoPlayer,
-  usePlayerVideoStatus,
-  createStandalonePlayerVideoInstance,
   PlayerVideoView,
-  PlayerStatus,
 } from 'react-native-standalone-video-player';
 
 console.disableYellowBox = true;
@@ -88,7 +84,7 @@ export default function App() {
         style={styles.list}
         data={items}
         extraData={activeIndex}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_item, index) => index.toString()}
         renderItem={({ index }) => (
           <ItemMemo
             index={index}

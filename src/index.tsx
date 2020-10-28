@@ -129,6 +129,10 @@ function useVideoPlayer(playerInstance = 0) {
       status: 1,
     });
 
+    if (autoplay) {
+      // TODO: handle autoplay
+    }
+
     PlayerVideoManager.load(playerInstance, url, isHls);
 
     console.log(`PlayerVideo [${playerInstance}] load: ${id}`);
