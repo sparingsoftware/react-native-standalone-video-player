@@ -101,7 +101,8 @@ PlayerStatus
 
 ### Multiple instances
 You can have multiple simultaneus players with different URIs. Each function/hook and PlayerVideoView have `playerInstance` prop or param.
-```
+
+```jsx
 const { load } = useVideoPlayer(0);
 const { load: loadOther } = useVideoPlayer(1);
 
@@ -116,7 +117,6 @@ const { load: loadOther } = useVideoPlayer(1);
 <PlayerVideoView
   playerInstance={1}
 />
-
 ```
 
 ### ExoPlayer / AVPlayer
