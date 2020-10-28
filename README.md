@@ -1,7 +1,7 @@
 # react-native-standalone-video-player
 
 React Native video player which can be re-used across views 
-> **Still under development** (no official release yet).
+> ⚠️  🚧  - **Still under development** (no official release yet).
 
 ---
 
