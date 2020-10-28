@@ -48,7 +48,7 @@ useEffect(() => {
 ## Docs
 
 View
-* [PlayerVideoView](#<PlayerVideoView/>)
+* [PlayerVideoView](#PlayerVideoView)
 
 Hooks
 * [useVideoPlayer](#useVideoPlayer)
@@ -91,7 +91,7 @@ PlayerStatus
 | progress | number 0...1|
 | duration | number |
 
-### <PlayerVideoView />
+### PlayerVideoView
 | prop |  |
 | ------ | ------ |
 | isBoundToPlayer | `boolean` - if `true` player will stream into this view |
@@ -101,8 +101,14 @@ PlayerStatus
 ## Other
 
 ### ExoPlayer / AVPlayer
+On the native side on iOS it uses AVPlayer and on Android - ExoPlayer.
 
 ### isBoundToPlayer vs optional rendering
+You can use `isBoundToPlayer` as option to enable/disable streaming to this view. You can also use traditional optional rendering instead:
+```
+{ isActive && <PlayerVideoView ... }
+```
+Using `isBoundToPlayer` is better because it does not require rerenders however it may lead to strange behaviour especially on Android. I am still not sure which option to use...
 
 
 ## Contributing
