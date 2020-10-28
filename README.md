@@ -8,7 +8,7 @@ React Native video player which can be re-used across views
 In 90% of cases [react-native-video](https://github.com/react-native-video/react-native-video) will be enough. However there may be some cases when you need the Player to be separated from the View:
   - Loading video before presenting it
   - Showing the same video in different parts of the app (like preview and then fullview)
-  - As list element
+  - As list element (because views in list may be re-created)
 
 ---
 
