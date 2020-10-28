@@ -36,12 +36,12 @@ useEffect(() => {
   load('VIDEO_URL');
 }, []);
 
-// First player ...
+// ...
+
 <PlayerVideoView
   style={styles.player}
 />
 
-//...
 
 ```
 
@@ -95,10 +95,29 @@ PlayerStatus
 | prop |  |
 | ------ | ------ |
 | isBoundToPlayer | `boolean` - if `true` player will stream into this view |
-| playerInstance | `number` |
 
 
 ## Other
+
+### Multiple instances
+You can have multiple simultaneus players with different URIs. Each function/hook and PlayerVideoView have `playerInstance` prop or param.
+```
+const { load } = useVideoPlayer(0);
+const { load: loadOther } = useVideoPlayer(1);
+
+// ...
+
+<PlayerVideoView
+  playerInstance={0}
+/>
+
+// ...
+
+<PlayerVideoView
+  playerInstance={1}
+/>
+
+```
 
 ### ExoPlayer / AVPlayer
 On the native side on iOS it uses AVPlayer and on Android - ExoPlayer.
