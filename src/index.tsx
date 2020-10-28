@@ -111,7 +111,12 @@ function useVideoPlayer(playerInstance = 0) {
     console.log(`PlayerVideo [${playerInstance}] stop`);
   }
 
-  function load(url: string, id: string | null = null, isHls = true) {
+  function load(
+    url: string,
+    autoplay: boolean = true,
+    id: string | null = null,
+    isHls = true
+  ) {
     CurrentVideoId[playerInstance] = id;
 
     // emit here for faster loop (dont wait from native)
@@ -255,12 +260,12 @@ const RNTPlayerVideoView = requireNativeComponent('RNTPlayerVideoView');
 
 //
 
-interface Props {
+interface PlayerViewProps {
   // if true this view will be presenting video from Player
-  isBoundToPlayer: boolean;
+  isBoundToPlayer?: boolean;
 
   // you can use multiple instances of player (now supported only on ioS)
-  playerInstance: number;
+  playerInstance?: number;
 
   // any other prop
   // TODO: use React's view's props...
@@ -269,8 +274,15 @@ interface Props {
 
 //
 
-const PlayerVideoView = (props: Props) => {
+const PlayerVideoView: React.FunctionComponent<PlayerViewProps> = (
+  props: PlayerViewProps
+) => {
   return <RNTPlayerVideoView {...props} />;
+};
+
+PlayerVideoView.defaultProps = {
+  isBoundToPlayer: true,
+  playerInstance: 0,
 };
 
 //
