@@ -44,6 +44,7 @@ enum PlayerStatus {
   error = 'error', // 4,
   stopped = 'stopped', // 5,
   none = 'none', // 6
+  finished = 'finished', // 6
 }
 
 //
@@ -278,6 +279,8 @@ function createStatus(status: number): PlayerStatus {
       return PlayerStatus.stopped;
     case 6:
       return PlayerStatus.none;
+    case 7:
+      return PlayerStatus.finished;
   }
 
   return PlayerStatus.none;

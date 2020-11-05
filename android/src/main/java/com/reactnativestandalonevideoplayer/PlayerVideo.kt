@@ -112,7 +112,7 @@ class PlayerVideo(val context: Context) {
     player.prepare(mediaSource)
 
     player.playWhenReady = autoplay
-    player.repeatMode = Player.REPEAT_MODE_ALL
+    player.repeatMode = Player.REPEAT_MODE_OFF
     player.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
 
     setStatus(PlayerVideoStatus.new)
@@ -126,7 +126,10 @@ class PlayerVideo(val context: Context) {
           Player.STATE_IDLE -> setStatus(PlayerVideoStatus.none)
           Player.STATE_BUFFERING -> setStatus(PlayerVideoStatus.loading)
           Player.STATE_READY -> setStatus(if(player.playWhenReady) PlayerVideoStatus.playing else PlayerVideoStatus.paused)
-          Player.STATE_ENDED -> setStatus(PlayerVideoStatus.stopped)
+          Player.STATE_ENDED -> {
+            setStatus(PlayerVideoStatus.finished)
+            stopProgressTimer()
+          }
         }
       }
     })
@@ -143,6 +146,10 @@ class PlayerVideo(val context: Context) {
 
   fun play() {
     Log.d("PlayerVideo", "play")
+
+    if (status === PlayerVideoStatus.finished) {
+      seek(0.0)
+    }
 
     player.playWhenReady = true
 
@@ -236,8 +243,9 @@ enum class PlayerVideoStatus(val value: Int) {
   playing(2),
   paused(3),
   error(4),
-  stopped(5), // is it not the same as none?
-  none(6)
+  stopped(5), // stopped by the user
+  none(6),
+  finished(7) // done playing
 }
 
 fun printPlayerStatus(status: PlayerVideoStatus) : String {
