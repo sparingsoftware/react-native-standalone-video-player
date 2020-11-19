@@ -45,9 +45,9 @@ class PlayerContainerView: SimpleViewManager<PlayerView>() {
     Log.d("PlayerView", "bind isBound=${isBound}, playerInstance=${playerInstance}")
 
     view.player = if (isBound && playerInstance >= 0) PlayerVideo.instances[playerInstance].player else null
+    view.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
     (view.player as? SimpleExoPlayer)?.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-    view.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-
+    
     //
     if (isBound) {
       // we have to bind again after videoSizeChanged otherwise video ratio would be wrong
@@ -63,7 +63,7 @@ class PlayerContainerView: SimpleViewManager<PlayerView>() {
     playerView = PlayerView(reactContext)
 
     playerView.useController = false
-    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
     playerView.player = null
 
     Log.d("PlayerView", "createViewInstance")

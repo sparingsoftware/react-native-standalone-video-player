@@ -22,6 +22,8 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   init {
     context.addLifecycleEventListener(this)
+    
+    newInstance();
   }
 
   //
