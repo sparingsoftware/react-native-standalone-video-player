@@ -116,12 +116,20 @@ function useVideoPlayer(playerInstance = 0) {
       createStandalonePlayerVideoInstance();
     }
 
+    // notify current video
+    if (CurrentVideoId[playerInstance]) {
+      eventEmitter.emit('PlayerStatusChanged', {
+        instance: playerInstance,
+        status: 5, // stopped
+      });
+    }
+
     CurrentVideoId[playerInstance] = id;
 
     // emit here for faster loop (dont wait from native)
     eventEmitter.emit('PlayerStatusChanged', {
       instance: playerInstance,
-      status: 1,
+      status: 1, // loading
     });
 
     if (autoplay) {
