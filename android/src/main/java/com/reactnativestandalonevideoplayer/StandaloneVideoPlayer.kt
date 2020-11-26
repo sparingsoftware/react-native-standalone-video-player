@@ -22,7 +22,7 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
   init {
     context.addLifecycleEventListener(this)
-    
+
     newInstance();
   }
 
@@ -193,6 +193,19 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
 
     Handler(context.mainLooper).post {
       val duration = PlayerVideo.instances[instance].duration / 1000
+      promise.resolve(duration)
+    }
+  }
+
+  @ReactMethod
+  fun getProgress(instance: Int, promise: Promise) {
+    if (instance < 0 || instance >= PlayerVideo.instances.size) {
+      promise.resolve(0)
+      return
+    }
+
+    Handler(context.mainLooper).post {
+      val duration = PlayerVideo.instances[instance].progress
       promise.resolve(duration)
     }
   }

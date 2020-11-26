@@ -28,6 +28,7 @@ type StandaloneVideoPlayerType = {
   stop(instance: number): void;
 
   getDuration(instance: number): Promise<number>;
+  getProgress(instance: number): Promise<number>;
 
   clear(): void;
 };
@@ -78,6 +79,16 @@ function clearPlayerVideo() {
 function getVideoDuration(playerInstance = 0): Promise<number> {
   return new Promise((resolve) => {
     PlayerVideoManager.getDuration(playerInstance)
+      .then((val) => resolve(val || 0))
+      .catch(() => resolve(0));
+  });
+}
+
+//
+
+function getVideoProgress(playerInstance = 0): Promise<number> {
+  return new Promise((resolve) => {
+    PlayerVideoManager.getProgress(playerInstance)
       .then((val) => resolve(val || 0))
       .catch(() => resolve(0));
   });
@@ -259,6 +270,7 @@ function usePlayerVideoProgress(playerInstance = 0) {
 
   useEffect(() => {
     getVideoDuration(playerInstance).then(setDuration);
+    getVideoProgress(playerInstance).then(setProgress);
   }, [playerInstance]);
 
   return {
