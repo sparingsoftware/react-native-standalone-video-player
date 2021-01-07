@@ -90,7 +90,7 @@ class PlayerVideo(val context: Context) {
 
   //
 
-  fun loadVideo(url: String, isHls: Boolean) {
+  fun loadVideo(url: String, isHls: Boolean, loop: Boolean) {
     Log.d("PlayerVideo", "load = ${url}")
 
     // Produces DataSource instances through which media data is loaded.
@@ -112,7 +112,7 @@ class PlayerVideo(val context: Context) {
     player.prepare(mediaSource)
 
     player.playWhenReady = autoplay
-    player.repeatMode = Player.REPEAT_MODE_OFF
+    player.repeatMode = if(loop) Player.REPEAT_MODE_ALL else Player.REPEAT_MODE_OFF
     player.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
 
     setStatus(PlayerVideoStatus.new)

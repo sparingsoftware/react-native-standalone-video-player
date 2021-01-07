@@ -64,7 +64,7 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
   }
 
   @ReactMethod
-  fun load(instance: Int, url: String, isHls: Boolean) {
+  fun load(instance: Int, url: String, isHls: Boolean, loop: Boolean) {
     if (instance < 0 || instance >= PlayerVideo.instances.size) {
       return
     }
@@ -98,7 +98,7 @@ class StandaloneVideoPlayer(val context: ReactApplicationContext): ReactContextB
           .emit("PlayerProgressChanged", map)
       }
 
-      PlayerVideo.instances[instance].loadVideo(url, isHls)
+      PlayerVideo.instances[instance].loadVideo(url, isHls, loop)
     }
 
 
