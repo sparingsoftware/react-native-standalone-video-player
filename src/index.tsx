@@ -337,8 +337,8 @@ const PlayerVideoView: React.FunctionComponent<PlayerViewProps> = (
 };
 
 PlayerVideoView.defaultProps = {
-  isBoundToPlayer: true,
-  playerInstance: 0,
+  isBoundToPlayer: false,
+  playerInstance: -1,
 };
 
 //
