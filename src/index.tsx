@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   NativeEventEmitter,
   NativeModules,
@@ -97,15 +97,17 @@ function getVideoProgress(playerInstance = 0): Promise<number> {
 //
 
 function useVideoPlayer(playerInstance = 0) {
-  function play() {
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  const play = useCallback(() => {
     PlayerVideoManager.play(playerInstance);
-  }
+  }, []);
 
-  function pause() {
+  const pause = useCallback(() => {
     PlayerVideoManager.pause(playerInstance);
-  }
+  }, []);
 
-  function stop() {
+  const stop = useCallback(() => {
     // emit here for faster loop (dont wait from native)
     eventEmitter.emit('PlayerStatusChanged', {
       instance: playerInstance,
@@ -115,53 +117,60 @@ function useVideoPlayer(playerInstance = 0) {
     CurrentVideoId[playerInstance] = null;
 
     PlayerVideoManager.stop(playerInstance);
-  }
 
-  function load(
-    url: string,
-    autoplay: boolean = true,
-    id: string | null = null,
-    isHls = true,
-    loop = false
-  ) {
-    if (playerInstance >= PlayerInstances) {
-      createStandalonePlayerVideoInstance();
-    }
+    setCurrentUrl('');
+  }, []);
 
-    // notify current video
-    if (CurrentVideoId[playerInstance]) {
+  const load = useCallback(
+    (
+      url: string,
+      autoplay: boolean = true,
+      id: string | null = null,
+      isHls = true,
+      loop = false
+    ) => {
+      if (playerInstance >= PlayerInstances) {
+        createStandalonePlayerVideoInstance();
+      }
+
+      // notify current video
+      if (CurrentVideoId[playerInstance]) {
+        eventEmitter.emit('PlayerStatusChanged', {
+          instance: playerInstance,
+          status: 5, // stopped
+        });
+      }
+
+      CurrentVideoId[playerInstance] = id;
+
+      // emit here for faster loop (dont wait from native)
       eventEmitter.emit('PlayerStatusChanged', {
         instance: playerInstance,
-        status: 5, // stopped
+        status: 1, // loading
       });
-    }
 
-    CurrentVideoId[playerInstance] = id;
+      if (autoplay) {
+        // TODO: handle autoplay
+      }
 
-    // emit here for faster loop (dont wait from native)
-    eventEmitter.emit('PlayerStatusChanged', {
-      instance: playerInstance,
-      status: 1, // loading
-    });
+      PlayerVideoManager.load(playerInstance, url, isHls, loop);
 
-    if (autoplay) {
-      // TODO: handle autoplay
-    }
+      setCurrentUrl(url);
+    },
+    []
+  );
 
-    PlayerVideoManager.load(playerInstance, url, isHls, loop);
-  }
-
-  function seek(pos: number) {
+  const seek = useCallback((pos: number) => {
     PlayerVideoManager.seek(playerInstance, pos);
-  }
+  }, []);
 
-  function seekForward(time: number) {
+  const seekForward = useCallback((time: number) => {
     PlayerVideoManager.seekForward(playerInstance, time);
-  }
+  }, []);
 
-  function seekRewind(time: number) {
+  const seekRewind = useCallback((time: number) => {
     PlayerVideoManager.seekRewind(playerInstance, time);
-  }
+  }, []);
 
   return {
     play,
@@ -171,6 +180,7 @@ function useVideoPlayer(playerInstance = 0) {
     seek,
     seekForward,
     seekRewind,
+    currentUrl,
     videoId: CurrentVideoId[playerInstance],
   };
 }
