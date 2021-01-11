@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   NativeEventEmitter,
   NativeModules,
@@ -180,16 +180,19 @@ function useVideoPlayer(playerInstance = 0) {
     return CurrentVideoId[playerInstance];
   }, [playerInstance]);
 
-  return {
-    play,
-    pause,
-    stop,
-    load,
-    seek,
-    seekForward,
-    seekRewind,
-    getCurrentVideoId,
-  };
+  return useMemo(
+    () => ({
+      play,
+      pause,
+      stop,
+      load,
+      seek,
+      seekForward,
+      seekRewind,
+      getCurrentVideoId,
+    }),
+    [getCurrentVideoId, load, pause, play, seek, seekForward, seekRewind, stop]
+  );
 }
 
 //
