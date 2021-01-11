@@ -99,11 +99,11 @@ function getVideoProgress(playerInstance = 0): Promise<number> {
 function useVideoPlayer(playerInstance = 0) {
   const play = useCallback(() => {
     PlayerVideoManager.play(playerInstance);
-  }, []);
+  }, [playerInstance]);
 
   const pause = useCallback(() => {
     PlayerVideoManager.pause(playerInstance);
-  }, []);
+  }, [playerInstance]);
 
   const stop = useCallback(() => {
     // emit here for faster loop (dont wait from native)
@@ -115,7 +115,7 @@ function useVideoPlayer(playerInstance = 0) {
     CurrentVideoId[playerInstance] = null;
 
     PlayerVideoManager.stop(playerInstance);
-  }, []);
+  }, [playerInstance]);
 
   const load = useCallback(
     (
@@ -151,20 +151,34 @@ function useVideoPlayer(playerInstance = 0) {
 
       PlayerVideoManager.load(playerInstance, url, isHls, loop);
     },
-    []
+    [playerInstance]
   );
 
-  const seek = useCallback((pos: number) => {
-    PlayerVideoManager.seek(playerInstance, pos);
-  }, []);
+  const seek = useCallback(
+    (pos: number) => {
+      PlayerVideoManager.seek(playerInstance, pos);
+    },
+    [playerInstance]
+  );
 
-  const seekForward = useCallback((time: number) => {
-    PlayerVideoManager.seekForward(playerInstance, time);
-  }, []);
+  const seekForward = useCallback(
+    (time: number) => {
+      PlayerVideoManager.seekForward(playerInstance, time);
+    },
+    [playerInstance]
+  );
 
-  const seekRewind = useCallback((time: number) => {
-    PlayerVideoManager.seekRewind(playerInstance, time);
-  }, []);
+  const seekRewind = useCallback(
+    (time: number) => {
+      PlayerVideoManager.seekRewind(playerInstance, time);
+    },
+    [playerInstance]
+  );
+
+  const getCurrentVideoId = useCallback(() => {
+    // not the best way to return global var here...
+    return CurrentVideoId[playerInstance];
+  }, [playerInstance]);
 
   return {
     play,
@@ -174,7 +188,7 @@ function useVideoPlayer(playerInstance = 0) {
     seek,
     seekForward,
     seekRewind,
-    videoId: CurrentVideoId[playerInstance], // not the best way to return global var here...
+    getCurrentVideoId,
   };
 }
 
