@@ -65,9 +65,9 @@ class PlayerContainerView: SimpleViewManager<MyPlayerView>() {
 
     //
     if (view.isBound) {
-      // we have to bind again after videoSizeChanged otherwise video ratio would be wrong
+      // we have to setup again after videoSizeChanged otherwise video ratio would be wrong
       PlayerVideo.instances[view.playerInstance].videoSizeChanged = { width, height ->
-//        bind(view, true)
+        setup(view)
       }
     }
   }
