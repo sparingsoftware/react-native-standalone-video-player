@@ -97,8 +97,6 @@ function getVideoProgress(playerInstance = 0): Promise<number> {
 //
 
 function useVideoPlayer(playerInstance = 0) {
-  const [currentUrl, setCurrentUrl] = useState('');
-
   const play = useCallback(() => {
     PlayerVideoManager.play(playerInstance);
   }, []);
@@ -117,8 +115,6 @@ function useVideoPlayer(playerInstance = 0) {
     CurrentVideoId[playerInstance] = null;
 
     PlayerVideoManager.stop(playerInstance);
-
-    setCurrentUrl('');
   }, []);
 
   const load = useCallback(
@@ -154,8 +150,6 @@ function useVideoPlayer(playerInstance = 0) {
       }
 
       PlayerVideoManager.load(playerInstance, url, isHls, loop);
-
-      setCurrentUrl(url);
     },
     []
   );
@@ -180,8 +174,7 @@ function useVideoPlayer(playerInstance = 0) {
     seek,
     seekForward,
     seekRewind,
-    currentUrl,
-    videoId: CurrentVideoId[playerInstance],
+    videoId: CurrentVideoId[playerInstance], // not the best way to return global var here...
   };
 }
 
