@@ -202,12 +202,20 @@ function useVideoPlayer(playerInstance = 0) {
 const eventEmitter = new NativeEventEmitter(StandaloneVideoPlayer);
 
 const PlayerInfo = {
-  lastStatus: PlayerStatus.none,
+  // for each player instance
+  // TODO: make it dynamic for more players...
+  lastStatus: [
+    PlayerStatus.none,
+    PlayerStatus.none,
+    PlayerStatus.none,
+    PlayerStatus.none,
+    PlayerStatus.none,
+  ],
 };
 
 function usePlayerVideoStatus(playerInstance = 0, recordingId?: string) {
   // get current status
-  const [status, setStatus] = useState(PlayerInfo.lastStatus);
+  const [status, setStatus] = useState(PlayerInfo.lastStatus[playerInstance]);
 
   useEffect(() => {
     const subscription = eventEmitter.addListener(
@@ -215,7 +223,7 @@ function usePlayerVideoStatus(playerInstance = 0, recordingId?: string) {
       (data) => {
         if (data.instance === playerInstance) {
           if (!recordingId || recordingId === CurrentVideoId[playerInstance]) {
-            PlayerInfo.lastStatus = createStatus(data.status);
+            PlayerInfo.lastStatus[playerInstance] = createStatus(data.status);
 
             setStatus(createStatus(data.status));
           }
@@ -225,41 +233,6 @@ function usePlayerVideoStatus(playerInstance = 0, recordingId?: string) {
 
     return subscription.remove;
   }, [playerInstance, recordingId]);
-
-  return {
-    status,
-  };
-}
-
-//
-
-// it updates only for current recording
-function useRecordingPlayerVideoStatus(
-  recordingId: string,
-  playerInstance: number = 0
-) {
-  // get current status
-  const [status, setStatus] = useState(PlayerInfo.lastStatus);
-
-  useEffect(() => {
-    const subscription = eventEmitter.addListener(
-      'PlayerStatusChanged',
-      (data) => {
-        if (
-          data.instance === playerInstance &&
-          recordingId === CurrentVideoId[playerInstance]
-        ) {
-          PlayerInfo.lastStatus = createStatus(data.status);
-
-          setStatus(createStatus(data.status));
-        }
-      }
-    );
-
-    return () => subscription.remove();
-  }, [recordingId]);
-
-  //
 
   const forceLoadingStatus = () => {
     setStatus(PlayerStatus.loading);
