@@ -231,7 +231,7 @@ function usePlayerVideoStatus(playerInstance = 0, recordingId?: string) {
       }
     );
 
-    return subscription.remove;
+    return () => subscription.remove();
   }, [playerInstance, recordingId]);
 
   const forceLoadingStatus = () => {
