@@ -13,7 +13,15 @@ const { StandaloneVideoPlayer } = NativeModules;
 type StandaloneVideoPlayerType = {
   newInstance(): void;
 
-  load(instance: number, url: string, hls: boolean, loop: boolean): void;
+  load(
+    instance: number,
+    url: string,
+    hls: boolean,
+    loop: boolean,
+    isSilent: boolean
+  ): void;
+
+  setVolume(volume: number): void;
 
   seek(instance: number, position: number): void;
 
@@ -123,7 +131,8 @@ function useVideoPlayer(playerInstance = 0) {
       autoplay: boolean = true,
       id: string | null = null,
       isHls = true,
-      loop = false
+      loop = false,
+      isSilent = false
     ) => {
       if (playerInstance >= PlayerInstances) {
         createStandalonePlayerVideoInstance();
@@ -149,7 +158,7 @@ function useVideoPlayer(playerInstance = 0) {
         // TODO: handle autoplay
       }
 
-      PlayerVideoManager.load(playerInstance, url, isHls, loop);
+      PlayerVideoManager.load(playerInstance, url, isHls, loop, isSilent);
     },
     [playerInstance]
   );
