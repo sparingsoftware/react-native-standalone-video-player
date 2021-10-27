@@ -223,14 +223,20 @@ class PlayerVideo(val context: Context) {
     progressRunnable = Runnable {
       progressChanged?.invoke(progress, duration)
 
-      progressHandler?.postDelayed(progressRunnable, PROGRESS_UPDATE_TIME)
+      progressRunnable?.let {
+        progressHandler?.postDelayed(it, PROGRESS_UPDATE_TIME)
+      }
     }
 
-    progressHandler?.postDelayed(progressRunnable, 0)
+    progressRunnable?.let {
+      progressHandler?.postDelayed(it, 0)
+    }
   }
 
   private fun stopProgressTimer() {
-    progressHandler?.removeCallbacks(progressRunnable)
+    progressRunnable?.let {
+      progressHandler?.removeCallbacks(it)
+    }
   }
 
   //
